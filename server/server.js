@@ -27,6 +27,8 @@ const server = http.createServer((req, res) => {
     }
     xml2js.parseString(data, (err, result) => {
       if (err) {
+        res.statusCode = 500;
+        res.end('Internal Server Error');
         throw err;
       }
       console.log('OFFERS: ', result.SearchResult.Offers[0].Item);
