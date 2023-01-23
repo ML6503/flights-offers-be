@@ -1,4 +1,4 @@
-export class Signal<ListenerType> {
+export default class Signal<ListenerType> {
   private listeners: Array<(params: ListenerType) => void>;
 
   constructor() {
