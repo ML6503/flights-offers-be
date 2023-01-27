@@ -2,6 +2,10 @@ const fs = require('fs');
 const xml2js = require('xml2js');
 
 module.exports = async (_req, res) => {
+  // TODO  arrange  if or switch for req.url
+  //case `/offers`
+  // case `/airports`
+  // case `/flights`
   fs.readFile(__dirname + '/backend_xml_responce.xml', 'utf8', (err, data) => {
     if (err) {
       res.statusCode = 500;
