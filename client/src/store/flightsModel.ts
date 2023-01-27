@@ -1,51 +1,31 @@
 import Signal from '../utils/signal';
+import { IFlightInfo } from '../utils/interfaces';
 
-interface IFlight {
-  $: {
-    Code: string;
-    FareName: boolean;
-    Num: string;
-    Origin: string;
-    Depart: string; //date format "2017-09-28T18:20:00"
-    Arrive: string; //date format "017-09-29T09:10:00"
-    Leg: string;
-    Duration: string;
-    DurationMS: string;
-    Airplane: string;
-    Sys: string;
-    SystemAccessId: string;
-    OrderNum: string;
-    SegmentId: string; // "num"
-    BookingClass: string;
-    OperatingCode: string;
-    CharterVariantId: string; // "num"
-    Places: string; // "num"
-    PlacesCode: string;
-    TechStopCount: string; // "num"
-    Confirmed: boolean; // "false"
-    Sign: string;
-  };
-}
+// interface IOffer {
+//   flights?: IFlight[] | [];
+//   // flight: string;
+//   // depTime: Date;
+//   // arrTime: Date;
+//   // segmentId: number;
+//   isCombined: boolean;
+//   charter: boolean;
+//   price: string;
+//   // duration: string;
+// }
 
-interface IFlightInfo {
-  $: {
-    Price: string;
-    IsCombined: boolean;
-    ValidatorCode: string;
-    tariff_adult: string;
-    charter: boolean;
-    IsCharterSpecFare: boolean;
-    DirectionType: string;
-    Number: string;
-    HotelVaucher: boolean;
-  };
-  Flights: IFlight[];
-}
+// interface IFlight {
+//   flight: string;
+//   depTime: Date;
+//   arrTime: Date;
+//   segmentId: number;
+//   duration: string;
+// }
 
 export class FlightsModel {
-  private flightsData: IFlightInfo[];
-  private airports: string[] | [];
-  private airlines: string[] | [];
+  // public flightsInfoData: IFlightInfo[];
+  public flightsInfoData: IFlightInfo[] | [];
+  public airports: string[] | [];
+  public airlines: string[] | [];
   public onFilterAiports: Signal<{ choice: string; status: boolean }> =
     new Signal<{ choice: string; status: boolean }>();
   public onFilterAirlines: Signal<{ choice: string; status: boolean }> =
@@ -55,16 +35,69 @@ export class FlightsModel {
   constructor() {
     this.airports = [];
     this.airlines = [];
-    this.flightsData = [];
-    this.getFlightData();
+    this.flightsInfoData = [];
+    // this.fetchFlightData();
   }
 
-  async getFlightData() {
+  getflightsData() {
+    return this.flightsInfoData;
+  }
+
+  async fetchFlightData() {
     try {
-      let response = await fetch('http://localhost:8080/');
-      this.flightsData.push(await response.json());
-      console.log('FLIGHTS', this.flightsData);
-      return this.flightsData;
+      let response: IFlightInfo[] = await (
+        await fetch('http://localhost:8080/')
+      ).json();
+      // this.flightsData.push(await response.json());
+      // const details: any[] = [];
+
+      // let oneOffer: IOffer;
+      // console.log('response', response);
+      this.flightsInfoData = [...response];
+      // console.log(' this.flightsInfoData ', this.flightsInfoData);
+      // response.map((offer: any) => {
+      //   oneOffer = {
+      //     flights: [],
+      //     isCombined: offer.$.isCombined,
+      //     charter: offer.$.charter,
+      //     price: offer.$.price,
+      //   };
+
+      //   // console.log('offer details: ', offer.Flights[0].Item);
+      //   details.push(offer.Flights[0].Item);
+      //   console.log('offer details: ', details);
+      // });
+
+      // // this.flightsInfoData.push(response);
+      // // let oneFlight: IOffer;
+      // let oneFlight: IOneFlight;
+      // let flightsData: Array<IOffer | IFlight> | [] = [];
+
+      // details.map((f: any) => {
+      //   for (let i = 0; i < f.length; i++) {
+      //     oneFlight = {
+      //       flight: f[i].$.code + '-' + f[i].$.num,
+      //       depTime: new Date(f[i].$.depart),
+      //       arrTime: new Date(f[i].$.arrive),
+      //       segmentId: f[i].$.segmentId,
+      //       duration: f[i].$.duration,
+      //     };
+      //     // oneFlight.flight = f[i].$.code + '-' + f[i].$.num;
+      //     // oneFlight.depTime = new Date(f[i].$.depart);
+      //     // oneFlight.arrTime = new Date(f[i].$.arrive);
+      //     // oneFlight.segmentId;
+      //     // oneFlight.durationOW;
+      //     // oneFlight.durationReturn;
+      //     // console.log('one flight ', f[i].$.segmentId);
+      //   }
+
+      //   oneOffer.flights = [...oneOffer.flights, oneFlight];
+      //   // console.log('One offer: ', oneOffer);
+      //   flightsData = [...flightsData, oneOffer];
+      //   this.flightsInfoData = flightsData;
+      // });
+
+      return this.flightsInfoData;
     } catch (error) {
       console.error(error);
     }

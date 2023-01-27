@@ -1,1 +1,64 @@
- 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #222;
+  color: #fff;
+  font-size: 16px;
+}
+
+.app {
+  padding: 5%;
+  height: 100vh;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.flights-table {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.table-header-detail {
+  padding: 1rem 0;
+}
+
+.flight-row {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #fff;
+  /* height: 20px; */
+}
+
+.flights-section {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flight-detail {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
