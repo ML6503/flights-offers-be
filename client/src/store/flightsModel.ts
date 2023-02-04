@@ -46,7 +46,7 @@ export class FlightsModel {
   async fetchFlightData() {
     try {
       let response: IFlightInfo[] = await (
-        await fetch('http://localhost:8080/')
+        await fetch('http://localhost:8080/offers')
       ).json();
       // this.flightsData.push(await response.json());
       // const details: any[] = [];

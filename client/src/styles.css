@@ -54,6 +54,7 @@ ul {
   width: 70%;
   justify-content: space-between;
   align-items: center;
+  border-right: 1px dashed #fff;
 }
 
 .flight-detail {
@@ -61,4 +62,10 @@ ul {
   width: 100%;
   justify-content: space-around;
   align-items: center;
+}
+
+.fare-section {
+  display: flex;
+  width: 30%;
+  justify-content: space-around;
 }
