@@ -21,6 +21,22 @@ ul {
   list-style-type: none;
 }
 
+.header {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header label {
+  padding: 0 1rem;
+}
+
+.header select {
+  width: 7rem;
+  padding: 0.3rem;
+  background-color: cadetblue;
+}
+
 .flights-table {
   display: flex;
   flex-direction: column;
@@ -37,6 +53,7 @@ ul {
 
 .table-header-detail {
   padding: 1rem 0;
+  font-size: 1rem;
 }
 
 .flight-row {
@@ -51,7 +68,7 @@ ul {
 .flights-section {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 85%;
   justify-content: space-between;
   align-items: center;
   border-right: 1px dashed #fff;
@@ -68,4 +85,9 @@ ul {
   display: flex;
   width: 30%;
   justify-content: space-around;
+  padding: 0 0 0 1.5rem;
+}
+
+.flight-num {
+  align-self: flex-start;
 }

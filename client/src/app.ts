@@ -3,9 +3,12 @@ import { Core } from './utils/core';
 import { FlightsModel } from './store/flightsModel';
 import FlightsTable from './flightsTable';
 import HeaderTable from './header';
+import { IFlightInfo } from './utils/interfaces';
 export class App extends Core<HTMLDivElement> {
   private flightsModel: FlightsModel;
   private header: HeaderTable;
+  private flightData: [] | IFlightInfo[];
+  private airportData: [] | unknown[];
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'app', '');
@@ -14,14 +17,25 @@ export class App extends Core<HTMLDivElement> {
     this.flightsModel = new FlightsModel();
 
     // let flightData = this.flightsModel.getflightsData();
+    this.flightData = [];
+    this.airportData = [];
 
-    this.header = new HeaderTable(this.el);
-    this.getFlightsForTable();
+    (async () => {
+      await this.getFlightsForTable();
+      await this.getAirportsForTable();
+      this.header = new HeaderTable(this.node, this.airportData);
+      const flightsTable = new FlightsTable(this.node, this.flightData);
+    })();
   }
 
   async getFlightsForTable() {
     let flightData = await this.flightsModel.fetchFlightData();
-    const flightsTable = new FlightsTable(this.el, flightData);
-    // console.log('flight data App :', flightData);
+    this.flightData = flightData;
+  }
+
+  async getAirportsForTable() {
+    let airportData = await this.flightsModel.fetchAirportsData();
+    this.airportData = airportData;
+    console.log('airportData : ', this.airportData);
   }
 }

@@ -3,6 +3,8 @@ import { IOfferFlight } from './utils/interfaces';
 
 export default class FlightDetailCell extends Core<HTMLElement> {
   public flightDetails: IOfferFlight;
+  private originCell: Core<HTMLDivElement>;
+  private destinationCell: Core<HTMLDivElement>;
   private flightCell: Core<HTMLDivElement>;
   private depTimeCell: Core<HTMLDivElement>;
   private arrTimeCell: Core<HTMLDivElement>;
@@ -20,27 +22,41 @@ export default class FlightDetailCell extends Core<HTMLElement> {
     let arrH = dateArr.getHours();
     let arrM = dateArr.getMinutes();
 
+    this.originCell = new Core(
+      this.node,
+      'div',
+      'origin',
+      `${flightDetails.origin}`
+    );
+
+    this.destinationCell = new Core(
+      this.node,
+      'div',
+      'origin',
+      `${flightDetails.destination}`
+    );
+
     this.flightCell = new Core(
-      this.el,
+      this.node,
       'div',
       'flight-num',
       `${flightDetails.flight}`
     );
     this.depTimeCell = new Core(
-      this.el,
+      this.node,
       'div',
       'dep-time',
       `${depH}:${depM === 0 ? '00' : depM}`
     );
     this.arrTimeCell = new Core(
-      this.el,
+      this.node,
       'div',
       'dep-time',
       `${arrH}:${arrM === 0 ? '00' : arrM}`
     );
 
     this.durationCell = new Core(
-      this.el,
+      this.node,
       'div',
       'duration-cell',
       `${flightDetails.duration
@@ -54,7 +70,7 @@ export default class FlightDetailCell extends Core<HTMLElement> {
     );
 
     this.returnCell = new Core(
-      this.el,
+      this.node,
       'div',
       'return-cell',
       `${flightDetails.segmentId === 0 ? 'one way' : 'return'}`

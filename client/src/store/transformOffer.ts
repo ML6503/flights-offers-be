@@ -28,6 +28,10 @@ export default class TransfromOffer {
   toOfferFlights(flights: IFlight[]) {
     let offerFlights = [...flights].map((f) => {
       return {
+        ariline: f.$.code,
+        origin: f.$.origin,
+        destination: f.$.destination,
+        // fullFlightInfo: f.$,
         flight: `${f.$.code}-${f.$.num}`,
         depTime: new Date(f.$.depart),
         arrTime: new Date(f.$.arrive),

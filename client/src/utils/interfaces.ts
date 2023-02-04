@@ -62,6 +62,8 @@ export interface IOfferFlight {
   arrTime: Date;
   segmentId: number;
   duration: string;
+  origin: string;
+  destination: string;
 }
 
 export interface IOneFlight {

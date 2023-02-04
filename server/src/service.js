@@ -34,6 +34,9 @@ module.exports = async (req, res) => {
 
         const offers = result.SearchResult.Offers[0].Item;
         const airports = result.SearchResult.References[0].Airports[0].Item;
+        // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        // const encoding = Encoding.GetEncoding('windows-1251');
+        // const encodedAirports = encoding.GetString(responseBytes);
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
 

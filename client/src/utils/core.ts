@@ -1,20 +1,22 @@
-export class Core<T extends HTMLElement> {
-  el: T;
+export class Core<NodeType extends HTMLElement = HTMLElement> {
+  public node: NodeType;
+
   constructor(
     parent: HTMLElement,
-    tag: string = 'div',
+    tag: keyof HTMLElementTagNameMap = 'div',
     className: string = '',
     content: string = ''
   ) {
-    this.el = document.createElement(tag) as T;
-    this.el.className = className;
-    this.el.textContent = content;
+    const el = document.createElement(tag);
+    el.className = className;
+    el.textContent = content;
     if (parent) {
-      parent.append(this.el);
+      parent.append(el);
     }
+    this.node = el as NodeType;
   }
 
   destroy() {
-    this.el.remove();
+    this.node.remove();
   }
 }
