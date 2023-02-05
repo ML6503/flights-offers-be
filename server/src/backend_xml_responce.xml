@@ -1,35 +1,36 @@
+ <?xml version="1.0" encoding="utf-8"?>
 <SearchResult xmlns="">
 	<References>
 		<Airports>
-			<Item Code="SVO" Name="�����������" Lat="55.972642" Lng="37.414589" Country="���������� ���������" City="������"/>
-			<Item Code="KHV" Name="���������" Lat="48.528044" Lng="135.188361" Country="���������� ���������" City="���������"/>
-			<Item Code="IKT" Name="�������" Lat="52.268028" Lng="104.388975" Country="���������� ���������" City="�������"/>
-			<Item Code="DME" Name="����������" Lat="55.408611" Lng="37.906111" Country="���������� ���������" City="������"/>
-			<Item Code="OVB" Name="�����������" Lat="55.012622" Lng="82.650656" Country="���������� ���������" City="�����������"/>
-			<Item Code="SVX" Name="��������" Lat="56.743108" Lng="60.802728" Country="���������� ���������" City="������������"/>
-			<Item Code="VKO" Name="�������" Lat="55.591531" Lng="37.261486" Country="���������� ���������" City="������"/>
-			<Item Code="UUS" Name="��������" Lat="46.888672" Lng="142.717531" Country="���������� ���������" City="����-���������"/>
-			<Item Code="VVO" Name="�����������" Lat="43.398953" Lng="132.148017" Country="���������� ���������" City="�����������"/>
-			<Item Code="LED" Name="�����-���������" Lat="59.800292" Lng="30.262503" Country="���������� ���������" City="�����-���������"/>
-			<Item Code="YKS" Name="������" Lat="62.09325" Lng="129.770672" Country="���������� ���������" City="������"/>
-			<Item Code="UUD" Name="������" Lat="51.807764" Lng="107.437644" Country="���������� ���������" City="����-���"/>
-			<Item Code="PKC" Name="�������������-����������" Lat="53.167889" Lng="158.453669" Country="���������� ���������" City="�������������-����������"/>
-			<Item Code="GDX" Name="�������" Lat="59.910989" Lng="150.720439" Country="���������� ���������" City="�������"/>
-			<Item Code="ICN" Name="������" Lat="37.469075" Lng="126.450517" Country="����� �����" City="����"/>
-			<Item Code="DXB" Name="�����" Lat="25.252778" Lng="55.364444" Country="������������ �������� �������" City="�����"/>
-			<Item Code="AMS" Name="���������" Lat="52.308613" Lng="4.763889" Country="����������" City="���������"/>
+			<Item Code="SVO" Name="Moscow Sheremetyevo" Lat="55.972642" Lng="37.414589" Country="���������� ���������" City="������"/>
+			<Item Code="KHV" Name="Khabarovsk" Lat="48.528044" Lng="135.188361" Country="���������� ���������" City="���������"/>
+			<Item Code="IKT" Name="Irkutsk" Lat="52.268028" Lng="104.388975" Country="���������� ���������" City="�������"/>
+			<Item Code="DME" Name="Moscow omodedovo" Lat="55.408611" Lng="37.906111" Country="���������� ���������" City="������"/>
+			<Item Code="OVB" Name="Novosibirsk Tolmachevo" Lat="55.012622" Lng="82.650656" Country="���������� ���������" City="�����������"/>
+			<Item Code="SVX" Name="Ekaterinburg Koltsovo" Lat="56.743108" Lng="60.802728" Country="���������� ���������" City="������������"/>
+			<Item Code="VKO" Name="Moscow Vnukovo" Lat="55.591531" Lng="37.261486" Country="���������� ���������" City="������"/>
+			<Item Code="UUS" Name="Yuzhno-Sakhalinsk" Lat="46.888672" Lng="142.717531" Country="���������� ���������" City="����-���������"/>
+			<Item Code="VVO" Name="Vladivostok" Lat="43.398953" Lng="132.148017" Country="���������� ���������" City="�����������"/>
+			<Item Code="LED" Name="Saint-Petersburg Pulkovo" Lat="59.800292" Lng="30.262503" Country="���������� ���������" City="�����-���������"/>
+			<Item Code="YKS" Name="Yakutsk Platon Oyunsky" Lat="62.09325" Lng="129.770672" Country="���������� ���������" City="������"/>
+			<Item Code="UUD" Name="Baikal" Lat="51.807764" Lng="107.437644" Country="���������� ���������" City="����-���"/>
+			<Item Code="PKC" Name="Petropavlovsk-Kamchatsky Elizovo" Lat="53.167889" Lng="158.453669" Country="���������� ���������" City="�������������-����������"/>
+			<Item Code="GDX" Name="Magadan Sokol" Lat="59.910989" Lng="150.720439" Country="���������� ���������" City="�������"/>
+			<Item Code="ICN" Name="Seoul Incheon" Lat="37.469075" Lng="126.450517" Country="����� �����" City="����"/>
+			<Item Code="DXB" Name="Dubai" Lat="25.252778" Lng="55.364444" Country="������������ �������� �������" City="�����"/>
+			<Item Code="AMS" Name="Amsterdam Schiphol" Lat="52.308613" Lng="4.763889" Country="����������" City="���������"/>
 		</Airports>
 		<Airlines>
 			<Item Code="N4" Name="NORD WIND"/>
-			<Item Code="U6" Name="��������� ���������"/>
+			<Item Code="U6" Name="Ural Airlines"/>
 			<Item Code="H1" Name="HAHN AIR SYSTEMS"/>
-			<Item Code="SU" Name="��������"/>
+			<Item Code="SU" Name="AEROFLOT"/>
 			<Item Code="S7" Name="S7 Airlines"/>
-			<Item Code="R3" Name="������"/>
-			<Item Code="IO" Name="������"/>
+			<Item Code="R3" Name="YAKUTIA AIRLINES"/>
+			<Item Code="IO" Name="IRAERO"/>
 			<Item Code="EK" Name="Emirates Airlines"/>
 			<Item Code="KE" Name="Korean Air Lines Co Ltd"/>
-			<Item Code="KL" Name="Klm Royal Dutch Airlines"/>
+			<Item Code="KL" Name="KLM Royal Dutch Airlines"/>
 		</Airlines>
 	</References>
 	<Matrix>

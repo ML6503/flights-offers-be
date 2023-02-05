@@ -24,7 +24,7 @@ import { IFlightInfo } from '../utils/interfaces';
 export class FlightsModel {
   public flightsInfoData: IFlightInfo[] | [];
   public airports: unknown[] | [];
-  public airlines: string[] | [];
+  public airlines: unknown[] | [];
   public onFilterAiports: Signal<{ choice: string; status: boolean }> =
     new Signal<{ choice: string; status: boolean }>();
   public onFilterAirlines: Signal<{ choice: string; status: boolean }> =
@@ -35,7 +35,6 @@ export class FlightsModel {
     this.airports = [];
     this.airlines = [];
     this.flightsInfoData = [];
-    // this.fetchFlightData();
   }
 
   getflightsData() {
@@ -65,6 +64,20 @@ export class FlightsModel {
       this.airports = [...response];
 
       return this.airports;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async fetchAirlinesData() {
+    try {
+      let response: unknown[] = await (
+        await fetch('http://localhost:8080/flights')
+      ).json();
+
+      this.airlines = [...response];
+
+      return this.airlines;
     } catch (error) {
       console.error(error);
     }

@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
       res.end('Internal Server Error');
       throw err;
     }
+    const someEncodedString = Buffer.from(data, 'utf-8').toString();
 
     xml2js.parseString(
       data,
@@ -30,13 +31,12 @@ module.exports = async (req, res) => {
           res.end('Internal Server Error');
           throw err;
         }
-        console.log('OFFERS: ', result.SearchResult.Offers[0].Item[0]);
+        // console.log('OFFERS: ', result.SearchResult.Offers[0].Item[0]);
 
         const offers = result.SearchResult.Offers[0].Item;
         const airports = result.SearchResult.References[0].Airports[0].Item;
-        // Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-        // const encoding = Encoding.GetEncoding('windows-1251');
-        // const encodedAirports = encoding.GetString(responseBytes);
+        const airlines = result.SearchResult.References[0].Airlines[0].Item;
+
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Access-Control-Allow-Origin', '*');
 
@@ -47,12 +47,13 @@ module.exports = async (req, res) => {
             break;
           case '/airports':
             res.writeHead(200);
-            // res.end('airports');
+
             res.end(JSON.stringify(airports));
             break;
           case '/flights':
             res.writeHead(200);
-            res.end('flights');
+            res.end(JSON.stringify(airlines));
+            // res.end(someEncodedString);
             // res.end(JSON.stringify(flights));
             break;
           case '/':

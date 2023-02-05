@@ -5,9 +5,14 @@ export default class HeaderTable extends Core<HTMLDivElement> {
   public airportsInput: SelectInput;
   private labelAirports: Core;
   private labelAirlines: Core;
-  private inputOptionData: [] | unknown[];
+  private airlinesInputOptionData: [] | unknown[];
+  private airportsInputOptionData: [] | unknown[];
 
-  constructor(parent: HTMLElement, inputOptionData: [] | unknown[]) {
+  constructor(
+    parent: HTMLElement,
+    airlinesInputOptionData: [] | unknown[],
+    airportsInputOptionData: [] | unknown[]
+  ) {
     super(parent, 'div', 'header', '');
 
     this.labelAirlines = new Core(this.node, 'label', '', 'airlines');
@@ -15,7 +20,7 @@ export default class HeaderTable extends Core<HTMLDivElement> {
     this.airlinesInput = new SelectInput(
       this.node,
       'airlines',
-      inputOptionData
+      airlinesInputOptionData
     );
 
     this.labelAirports = new Core(this.node, 'label', '', 'airports');
@@ -23,8 +28,9 @@ export default class HeaderTable extends Core<HTMLDivElement> {
     this.airportsInput = new SelectInput(
       this.node,
       'airports',
-      inputOptionData
+      airportsInputOptionData
     );
+
     // 2 filters
     // фильтр Аэропорты. Создать возможность фильтровать перелеты по этому списку.
     // фильтр Авиакомпании. Создать возможность фильтровать перелеты по этому списку.
