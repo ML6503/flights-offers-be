@@ -7,8 +7,6 @@ const app = () => {
   const PORT = process.env.PORT || 8080;
 
   const server = http.createServer(async (req, res) => {
-    console.log('req method', req.method);
-
     req.query = new URL(req.url, `http://${req.headers.host}`);
 
     try {

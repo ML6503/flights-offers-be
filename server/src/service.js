@@ -2,27 +2,17 @@ const fs = require('fs');
 const xml2js = require('xml2js');
 
 module.exports = async (req, res) => {
-  // TODO  arrange  if or switch for req.url
-  //case `/offers`
-  // case `/airports`
-  // case `/flights`
-  console.log('we are in service');
   fs.readFile(__dirname + '/backend_xml_responce.xml', 'utf8', (err, data) => {
     if (err) {
       res.statusCode = 500;
       res.end('Internal Server Error');
       throw err;
     }
-    const someEncodedString = Buffer.from(data, 'utf-8').toString();
 
     xml2js.parseString(
       data,
-
       {
-        attrNameProcessors: [
-          xml2js.processors.firstCharLowerCase,
-          // xml2js.processors.parseNumbers,
-        ],
+        attrNameProcessors: [xml2js.processors.firstCharLowerCase],
         attrValueProcessors: [xml2js.processors.parseBooleans],
       },
       (err, result) => {
@@ -31,7 +21,6 @@ module.exports = async (req, res) => {
           res.end('Internal Server Error');
           throw err;
         }
-        // console.log('OFFERS: ', result.SearchResult.Offers[0].Item[0]);
 
         const offers = result.SearchResult.Offers[0].Item;
         const airports = result.SearchResult.References[0].Airports[0].Item;
@@ -53,13 +42,12 @@ module.exports = async (req, res) => {
           case '/flights':
             res.writeHead(200);
             res.end(JSON.stringify(airlines));
-            // res.end(someEncodedString);
-            // res.end(JSON.stringify(flights));
+
             break;
           case '/':
             res.writeHead(200);
             res.end(JSON.stringify({ message: 'Server is running' }));
-            // res.end(JSON.stringify(flights));
+
             break;
           default:
             res.writeHead(404);
