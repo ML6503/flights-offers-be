@@ -56,7 +56,7 @@ export class App extends Core<HTMLDivElement> {
 
   async updateFlightsTable() {
     this.flightsTable && this.flightsTable.destroy();
-    console.log('weare in update table: ', this.flightsModel.getflightsData());
+
     this.flightsTable = new FlightsTable(
       this.node,
       this.flightsModel.getflightsData()
@@ -69,7 +69,6 @@ export class App extends Core<HTMLDivElement> {
     if (code === 'ALL') {
       await this.flightsModel.fetchFlightData();
 
-      console.log('ALL ALL case: ', this.flightsModel.getflightsData());
       this.updateFlightsTable();
     } else {
       let resultedFlights = [];
@@ -98,11 +97,6 @@ export class App extends Core<HTMLDivElement> {
 
     if (code === 'ALL') {
       await this.flightsModel.fetchFlightData();
-
-      console.log(
-        'ALL ALL APR FLT - MODEL flights: ',
-        this.flightsModel.getflightsData()
-      );
 
       this.updateFlightsTable();
     } else {
