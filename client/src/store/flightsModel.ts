@@ -1,5 +1,6 @@
 import Signal from '../utils/signal';
 import { IFlightInfo } from '../utils/interfaces';
+import TransfromOffer from './transformOffer';
 
 // interface IOffer {
 //   flights?: IFlight[] | [];
@@ -22,7 +23,7 @@ import { IFlightInfo } from '../utils/interfaces';
 // }
 
 export class FlightsModel {
-  public flightsInfoData: IFlightInfo[] | [];
+  public flightsInfoData: IFlightInfo[] | [] | TransfromOffer[];
   public airports: unknown[] | [];
   public airlines: unknown[] | [];
   public onFilterAiports: Signal<{ choice: string; status: boolean }> =
@@ -47,7 +48,7 @@ export class FlightsModel {
         await fetch('http://localhost:8080/offers')
       ).json();
 
-      this.flightsInfoData = [...response];
+      this.flightsInfoData = [...response].map((f) => new TransfromOffer(f));
 
       return this.flightsInfoData;
     } catch (error) {

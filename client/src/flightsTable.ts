@@ -1,5 +1,5 @@
 import { Core } from './utils/core';
-import { IFlightInfo } from './utils/interfaces';
+import { IFlightInfo, IOffer } from './utils/interfaces';
 import Row from './row';
 import TransfromOffer from './store/transformOffer';
 
@@ -8,11 +8,11 @@ export default class FlightsTable extends Core<HTMLDivElement> {
   private heading: Core<HTMLElement>;
   private tableHeader: Core<HTMLElement>;
   private fareDetail: Core<HTMLElement>;
-  flightData: IFlightInfo[];
+  flightsData: TransfromOffer[] | [];
 
-  constructor(parent: HTMLElement, flightsData: IFlightInfo[]) {
+  constructor(parent: HTMLElement, flightsData: TransfromOffer[]) {
     super(parent, 'div', 'flights-table', '');
-    this.flightData = [...flightsData];
+    this.flightsData = [...flightsData];
 
     this.heading = new Core(this.node, 'h2', 'flight-table-heading', 'Offers:');
     this.tableHeader = new Core(this.node, 'div', 'table-header');
@@ -38,7 +38,8 @@ export default class FlightsTable extends Core<HTMLDivElement> {
       //   'displayed flights info: ',
       //   new TransfromOffer(flightsData[i])
       // );
-      new Row(this.node, new TransfromOffer(flightsData[i]));
+      // new Row(this.node, new TransfromOffer(flightsData[i]));
+      new Row(this.node, flightsData[i]);
     }
   }
 }

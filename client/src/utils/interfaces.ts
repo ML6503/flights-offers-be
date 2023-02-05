@@ -64,6 +64,7 @@ export interface IOfferFlight {
   duration: string;
   origin: string;
   destination: string;
+  airline?: string;
 }
 
 export interface IOneFlight {

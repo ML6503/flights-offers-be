@@ -28,7 +28,7 @@ export default class TransfromOffer {
   toOfferFlights(flights: IFlight[]) {
     let offerFlights = [...flights].map((f) => {
       return {
-        ariline: f.$.code,
+        airline: f.$.code,
         origin: f.$.origin,
         destination: f.$.destination,
         // fullFlightInfo: f.$,
