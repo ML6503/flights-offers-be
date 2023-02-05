@@ -5,7 +5,7 @@
 			<Item Code="SVO" Name="Moscow Sheremetyevo" Lat="55.972642" Lng="37.414589" Country="���������� ���������" City="������"/>
 			<Item Code="KHV" Name="Khabarovsk" Lat="48.528044" Lng="135.188361" Country="���������� ���������" City="���������"/>
 			<Item Code="IKT" Name="Irkutsk" Lat="52.268028" Lng="104.388975" Country="���������� ���������" City="�������"/>
-			<Item Code="DME" Name="Moscow omodedovo" Lat="55.408611" Lng="37.906111" Country="���������� ���������" City="������"/>
+			<Item Code="DME" Name="Moscow Domodedovo" Lat="55.408611" Lng="37.906111" Country="���������� ���������" City="������"/>
 			<Item Code="OVB" Name="Novosibirsk Tolmachevo" Lat="55.012622" Lng="82.650656" Country="���������� ���������" City="�����������"/>
 			<Item Code="SVX" Name="Ekaterinburg Koltsovo" Lat="56.743108" Lng="60.802728" Country="���������� ���������" City="������������"/>
 			<Item Code="VKO" Name="Moscow Vnukovo" Lat="55.591531" Lng="37.261486" Country="���������� ���������" City="������"/>

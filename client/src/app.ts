@@ -15,11 +15,10 @@ export class App extends Core<HTMLDivElement> {
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'app', '');
-    // let response = async () => await (await fetch('http://localhost:8080/')).json();
-    // this.flightsData.push(await response.json());
+
     this.flightsModel = new FlightsModel();
     this.flightsTable;
-    // let flightData = this.flightsModel.getflightsData();
+
     this.flightData = [];
     this.airportData = [];
     this.airlinesData = [];
@@ -34,7 +33,8 @@ export class App extends Core<HTMLDivElement> {
         this.airportData,
         this.flightsModel.onFilterAiports,
         this.flightsModel.onFilterAirlines,
-        this.onFilterAirlinesChange
+        this.onFilterAirlinesChange,
+        this.onFilterAirportsChange
       );
       this.updateFlightsTable();
     })();
@@ -48,36 +48,90 @@ export class App extends Core<HTMLDivElement> {
   async getAirportsForTable() {
     let airportData = await this.flightsModel.fetchAirportsData();
     this.airportData = airportData;
-    // console.log('airportData : ', this.airportData);
   }
 
   async getAirlinesForTable() {
     let airlinesData = await this.flightsModel.fetchAirlinesData();
     this.airlinesData = airlinesData;
-    // console.log('airLinesData : ', this.airlinesData);
   }
 
-  updateFlightsTable() {
+  async updateFlightsTable() {
     this.flightsTable && this.flightsTable.destroy();
-    this.flightsTable = new FlightsTable(this.node, this.flightData);
+    console.log('weare in update table: ', this.flightsModel.getflightsData());
+    this.flightsTable = new FlightsTable(
+      this.node,
+      this.flightsModel.getflightsData()
+    );
 
-    return this.flightsTable;
+    // return this.flightsTable;
   }
 
   onFilterAirlinesChange = async (code: string) => {
-    const flightsInfo = await this.flightsModel.fetchFlightData();
-    const resultedFlights = [];
-    for (let i = 0; i < flightsInfo.length; i++) {
-      let oneFlight = flightsInfo[i];
-      let newFlights = [...oneFlight.flights].filter((f) => f.airline === code);
+    this.flightsModel.airlineState = code;
 
-      oneFlight.flights = newFlights;
-      if (oneFlight.flights.length > 0) {
-        resultedFlights.push(oneFlight);
+    // let flightsInfo: TransfromOffer[] | [];
+
+    if (code === 'ALL') {
+      await this.flightsModel.fetchFlightData();
+      // this.flightsModel.setflightsData(result);
+      // this.flightData = this.flightsModel.getflightsData();
+      console.log('ALL ALL case: ', this.flightsModel.getflightsData());
+      this.updateFlightsTable();
+    } else {
+      let resultedFlights = [];
+      let result = await this.flightsModel.fetchFlightData();
+      let flightsInfo = [...result];
+
+      for (let i = 0; i < flightsInfo.length; i++) {
+        let oneFlight = flightsInfo[i];
+        let newFlights = [...oneFlight.flights].filter(
+          (f) => f.airline === code
+        );
+
+        oneFlight.flights = newFlights;
+        if (oneFlight.flights.length > 0) {
+          resultedFlights.push(oneFlight);
+        }
       }
+
+      this.flightsModel.setflightsData(resultedFlights);
+      this.updateFlightsTable();
     }
-    this.flightData = resultedFlights;
-    this.updateFlightsTable();
+  };
+
+  onFilterAirportsChange = async (code: string) => {
+    this.flightsModel.airportState = code;
+
+    if (code === 'ALL') {
+      await this.flightsModel.fetchFlightData();
+
+      console.log(
+        'ALL ALL APR FLT - MODEL flights: ',
+        this.flightsModel.getflightsData()
+      );
+
+      this.updateFlightsTable();
+    } else {
+      let resultedFlights = [];
+      let result = await this.flightsModel.fetchFlightData();
+      let flightsInfo = [...result];
+
+      for (let i = 0; i < flightsInfo.length; i++) {
+        let oneFlight = flightsInfo[i];
+
+        let newFlights = [...oneFlight.flights].filter(
+          (f) => f.origin === code
+        );
+
+        oneFlight.flights = newFlights;
+        if (oneFlight.flights.length > 0) {
+          resultedFlights.push(oneFlight);
+        }
+      }
+
+      this.flightsModel.setflightsData(resultedFlights);
+      this.updateFlightsTable();
+    }
   };
 
   getFlightData() {

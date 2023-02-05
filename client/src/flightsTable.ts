@@ -34,11 +34,6 @@ export default class FlightsTable extends Core<HTMLDivElement> {
     );
 
     for (let i = 0; i < flightsData.length; i++) {
-      // console.log(
-      //   'displayed flights info: ',
-      //   new TransfromOffer(flightsData[i])
-      // );
-      // new Row(this.node, new TransfromOffer(flightsData[i]));
       new Row(this.node, flightsData[i]);
     }
   }
