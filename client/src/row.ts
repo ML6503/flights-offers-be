@@ -11,7 +11,6 @@ export default class Row extends Core<HTMLElement> {
   constructor(parent: HTMLElement, fareDetails: IOffer) {
     super(parent, 'div', 'flight-row');
 
-    // console.log('row fare: ', fareDetails);
     this.flightsSection = new Core(this.node, 'div', 'flights-section');
     this.fareSection = new Core(this.node, 'div', 'fare-section');
 

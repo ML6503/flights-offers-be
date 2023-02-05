@@ -1,13 +1,12 @@
 import { Core } from './utils/core';
-import { IFlightInfo, IOffer } from './utils/interfaces';
 import Row from './row';
 import TransfromOffer from './store/transformOffer';
 
 export default class FlightsTable extends Core<HTMLDivElement> {
-  private row: Core<HTMLElement>;
-  private heading: Core<HTMLElement>;
+  private readonly row: Core<HTMLElement>;
+  private readonly heading: Core<HTMLElement>;
   private tableHeader: Core<HTMLElement>;
-  private fareDetail: Core<HTMLElement>;
+  private readonly fareDetail: Core<HTMLElement>;
   flightsData: TransfromOffer[] | [];
 
   constructor(parent: HTMLElement, flightsData: TransfromOffer[]) {

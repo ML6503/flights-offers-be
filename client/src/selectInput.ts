@@ -15,8 +15,6 @@ export default class SelectInput extends Core<HTMLElement> {
 
     this.options;
     options.map((item) => {
-      // console.log('displayed options info: ', item.$);
-
       let option = new Core(this.node, 'option', `${name}-option`, item.$.name);
       option.node.setAttribute('lang', 'ru');
 
@@ -25,11 +23,6 @@ export default class SelectInput extends Core<HTMLElement> {
     const allOption = new Core(this.node, 'option', `all-option`, 'ALL');
     allOption.node.setAttribute('selected', 'true');
     this.options = [allOption, ...options];
-
-    for (let i = 0; i < options.length; i++) {
-      // console.log('displayed options info: ', options[i].$.name);
-      // new Core(this.node, 'option', `${name}-option`, options[i].$.name);
-    }
 
     this.node.onchange = (ev) => {
       console.log('On input change', (ev.target as HTMLInputElement).value);
@@ -52,7 +45,6 @@ export default class SelectInput extends Core<HTMLElement> {
         for (let i = 0; i < options.length; i++) {
           if ((options[i] as any).$.name === value) {
             this.code = (options[i] as any).$.code;
-            // console.log('code:', this.code);
           }
         }
         this.onChange(this.code);

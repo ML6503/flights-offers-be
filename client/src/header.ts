@@ -69,9 +69,5 @@ export default class HeaderTable extends Core<HTMLDivElement> {
       console.log('code:', this.airportsInput.getCode());
       onFilterAirportsChange(code);
     };
-
-    // 2 filters
-    // фильтр Аэропорты. Создать возможность фильтровать перелеты по этому списку.
-    // фильтр Авиакомпании. Создать возможность фильтровать перелеты по этому списку.
   }
 }

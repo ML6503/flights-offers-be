@@ -46,14 +46,9 @@ export interface IFlightInfo {
 
 export interface IOffer {
   flights?: IOfferFlight[] | [];
-  // flight: string;
-  // depTime: Date;
-  // arrTime: Date;
-  // segmentId: number;
   isCombined: boolean;
   charter: boolean;
   price: string;
-  // duration: string;
 }
 
 export interface IOfferFlight {

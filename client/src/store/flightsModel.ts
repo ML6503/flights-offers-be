@@ -2,26 +2,6 @@ import Signal from '../utils/signal';
 import { IFlightInfo } from '../utils/interfaces';
 import TransfromOffer from './transformOffer';
 
-// interface IOffer {
-//   flights?: IFlight[] | [];
-//   // flight: string;
-//   // depTime: Date;
-//   // arrTime: Date;
-//   // segmentId: number;
-//   isCombined: boolean;
-//   charter: boolean;
-//   price: string;
-//   // duration: string;
-// }
-
-// interface IFlight {
-//   flight: string;
-//   depTime: Date;
-//   arrTime: Date;
-//   segmentId: number;
-//   duration: string;
-// }
-
 export class FlightsModel {
   public flightsInfoData: [] | TransfromOffer[];
   public airports: unknown[] | [];

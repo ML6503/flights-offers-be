@@ -3,7 +3,6 @@ import { Core } from './utils/core';
 import { FlightsModel } from './store/flightsModel';
 import FlightsTable from './flightsTable';
 import HeaderTable from './header';
-import { IFlightInfo } from './utils/interfaces';
 import TransfromOffer from './store/transformOffer';
 export class App extends Core<HTMLDivElement> {
   private flightsModel: FlightsModel;
@@ -62,19 +61,14 @@ export class App extends Core<HTMLDivElement> {
       this.node,
       this.flightsModel.getflightsData()
     );
-
-    // return this.flightsTable;
   }
 
   onFilterAirlinesChange = async (code: string) => {
     this.flightsModel.airlineState = code;
 
-    // let flightsInfo: TransfromOffer[] | [];
-
     if (code === 'ALL') {
       await this.flightsModel.fetchFlightData();
-      // this.flightsModel.setflightsData(result);
-      // this.flightData = this.flightsModel.getflightsData();
+
       console.log('ALL ALL case: ', this.flightsModel.getflightsData());
       this.updateFlightsTable();
     } else {
