@@ -25,19 +25,11 @@ export default class SelectInput extends Core<HTMLElement> {
     this.options = [allOption, ...options];
 
     this.node.onchange = (ev) => {
-      console.log('On input change', (ev.target as HTMLInputElement).value);
       let value = (ev.target as HTMLInputElement).value.substring(
         (ev.target as HTMLInputElement).selectionStart,
         (ev.target as HTMLInputElement).selectionEnd
       );
 
-      console.log(
-        'value === ALL ',
-        (ev.target as HTMLInputElement).value.substring(
-          (ev.target as HTMLInputElement).selectionStart,
-          (ev.target as HTMLInputElement).selectionEnd
-        ) === 'ALL'
-      );
       if (value === 'ALL') {
         this.code = 'ALL';
         this.onChange('ALL');

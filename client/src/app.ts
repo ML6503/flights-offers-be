@@ -4,6 +4,7 @@ import { FlightsModel } from './store/flightsModel';
 import FlightsTable from './flightsTable';
 import HeaderTable from './header';
 import TransfromOffer from './store/transformOffer';
+import Informer from './informer';
 export class App extends Core<HTMLDivElement> {
   private flightsModel: FlightsModel;
   private header: HeaderTable;
@@ -11,9 +12,7 @@ export class App extends Core<HTMLDivElement> {
   private airportData: [] | unknown[];
   private airlinesData: [] | unknown[];
   private flightsTable: FlightsTable | null;
-  private infoWrapper: Core;
-  private infoHeading: Core;
-  private infoSpan: Core;
+  private informer: Informer;
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'app', '');
@@ -38,19 +37,7 @@ export class App extends Core<HTMLDivElement> {
         this.onFilterAirlinesChange,
         this.onFilterAirportsChange
       );
-      this.infoWrapper = new Core(this.node, 'div', 'info-wrapper');
-      this.infoHeading = new Core(
-        this.infoWrapper.node,
-        'h4',
-        'informer-heading',
-        'Informer: '
-      );
-      this.infoSpan = new Core(
-        this.infoWrapper.node,
-        'span',
-        'informer',
-        this.flightsModel.getInformer()
-      );
+
       this.updateFlightsTable();
     })();
   }
@@ -72,6 +59,12 @@ export class App extends Core<HTMLDivElement> {
 
   async updateFlightsTable() {
     this.flightsTable && this.flightsTable.destroy();
+    this.informer && this.informer.destroy();
+    // this.informer = new Informer(this.node, this.flightsModel.getInformer());
+    this.informer = new Informer(
+      this.node,
+      this.flightsModel.getInformerEntries()
+    );
 
     this.flightsTable = new FlightsTable(
       this.node,
@@ -82,7 +75,10 @@ export class App extends Core<HTMLDivElement> {
   onFilterAirlinesChange = async (code: string) => {
     this.flightsModel.airlineState = code;
 
-    if (code === 'ALL') {
+    if (
+      code === 'ALL' ||
+      (code === 'ALL' && this.flightsModel.airlineState === 'ALL')
+    ) {
       await this.flightsModel.fetchFlightData();
 
       this.updateFlightsTable();
@@ -96,6 +92,12 @@ export class App extends Core<HTMLDivElement> {
         let newFlights = [...oneFlight.flights].filter(
           (f) => f.airline === code
         );
+
+        if (code !== 'ALL' && this.flightsModel.airportState !== 'ALL') {
+          newFlights = newFlights.filter(
+            (f) => f.origin === this.flightsModel.airportState
+          );
+        }
 
         oneFlight.flights = newFlights;
         if (oneFlight.flights.length > 0) {
@@ -111,7 +113,10 @@ export class App extends Core<HTMLDivElement> {
   onFilterAirportsChange = async (code: string) => {
     this.flightsModel.airportState = code;
 
-    if (code === 'ALL') {
+    if (
+      code === 'ALL' ||
+      (code === 'ALL' && this.flightsModel.airlineState === 'ALL')
+    ) {
       await this.flightsModel.fetchFlightData();
 
       this.updateFlightsTable();
@@ -126,6 +131,13 @@ export class App extends Core<HTMLDivElement> {
         let newFlights = [...oneFlight.flights].filter(
           (f) => f.origin === code
         );
+
+        if (code !== 'ALL' && this.flightsModel.airlineState !== 'ALL') {
+          // if (this.flightsModel.airlineState !== 'ALL') {
+          newFlights = newFlights.filter(
+            (f) => f.airline === this.flightsModel.airlineState
+          );
+        }
 
         oneFlight.flights = newFlights;
         if (oneFlight.flights.length > 0) {

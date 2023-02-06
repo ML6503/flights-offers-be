@@ -52,7 +52,7 @@ export default class HeaderTable extends Core<HTMLDivElement> {
     );
     this.airlinesInput.onChange = () => {
       let code = this.airlinesInput.getCode();
-      console.log('code:', this.airlinesInput.getCode());
+
       onFilterAirlinesChange(code);
     };
 
@@ -66,7 +66,7 @@ export default class HeaderTable extends Core<HTMLDivElement> {
 
     this.airportsInput.onChange = () => {
       let code = this.airportsInput.getCode();
-      console.log('code:', this.airportsInput.getCode());
+
       onFilterAirportsChange(code);
     };
   }
