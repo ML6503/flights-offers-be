@@ -11,6 +11,9 @@ export class App extends Core<HTMLDivElement> {
   private airportData: [] | unknown[];
   private airlinesData: [] | unknown[];
   private flightsTable: FlightsTable | null;
+  private infoWrapper: Core;
+  private infoHeading: Core;
+  private infoSpan: Core;
 
   constructor(parent: HTMLElement) {
     super(parent, 'div', 'app', '');
@@ -34,6 +37,19 @@ export class App extends Core<HTMLDivElement> {
         this.flightsModel.onFilterAirlines,
         this.onFilterAirlinesChange,
         this.onFilterAirportsChange
+      );
+      this.infoWrapper = new Core(this.node, 'div', 'info-wrapper');
+      this.infoHeading = new Core(
+        this.infoWrapper.node,
+        'h4',
+        'informer-heading',
+        'Informer: '
+      );
+      this.infoSpan = new Core(
+        this.infoWrapper.node,
+        'span',
+        'informer',
+        this.flightsModel.getInformer()
       );
       this.updateFlightsTable();
     })();

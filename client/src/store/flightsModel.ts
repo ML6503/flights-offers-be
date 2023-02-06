@@ -13,11 +13,13 @@ export class FlightsModel {
   public onOver: Signal<string> = new Signal<string>();
   airlineState = 'ALL';
   airportState = 'ALL';
+  private informer: string;
 
   constructor() {
     this.airports = [];
     this.airlines = [];
     this.flightsInfoData = [];
+    this.informer = '';
   }
 
   getflightsData() {
@@ -33,9 +35,9 @@ export class FlightsModel {
       let response: IFlightInfo[] = await (
         await fetch('http://localhost:8080/offers')
       ).json();
-
+      await this.getPerformanceObersver('fetchFlightsData');
       this.flightsInfoData = [...response].map((f) => new TransfromOffer(f));
-
+      await this.getPerformanceObersver('transformFlightsData');
       return this.flightsInfoData;
     } catch (error) {
       console.error(error);
@@ -49,7 +51,7 @@ export class FlightsModel {
       ).json();
 
       this.airports = [...response];
-
+      await this.getPerformanceObersver('fetchAirportsData');
       return this.airports;
     } catch (error) {
       console.error(error);
@@ -63,10 +65,53 @@ export class FlightsModel {
       ).json();
 
       this.airlines = [...response];
-
+      await this.getPerformanceObersver('fetchAirlinesData');
       return this.airlines;
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async getPerformanceObersver(funcName: string) {
+    const observer = new PerformanceObserver((list) =>
+      list.getEntries().forEach((entry) => {
+        this.informer =
+          'Name: ' +
+          entry.name +
+          ', Type: ' +
+          entry.entryType +
+          ', Start: ' +
+          entry.startTime +
+          ', Duration: ' +
+          entry.duration +
+          '\n';
+        if (console) {
+          console.info(
+            'Name: ' +
+              entry.name +
+              ', Type: ' +
+              entry.entryType +
+              ', Start: ' +
+              entry.startTime +
+              ', Duration: ' +
+              entry.duration +
+              '\n'
+          );
+        }
+      })
+    );
+
+    observer.observe({ entryTypes: ['measure', 'resource'] });
+
+    performance.mark('registered-observer');
+    return performance.measure(funcName);
+    // const wrappedFetchFlights = performance.timerify(this.fetchFlightData);
+    // await wrappedFetchFlights();
+
+    // observer.disconnect();
+  }
+
+  getInformer() {
+    return this.informer;
   }
 }
