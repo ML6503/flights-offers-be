@@ -76,6 +76,57 @@ export class FlightsModel {
     }
   }
 
+  async filterFlights() {
+    // if all airlines and airports show all flights
+    // if all airlines but selected apt - fiilter by apt state
+    // if all apts but selected airline - fiilter by airline state
+    // if both states selected then apply 2 filters
+
+    let resultedFlights = [];
+    let result = await this.fetchFlightData();
+    let flightsInfo = [...result];
+    if (this.airlineState === 'ALL' && this.airportState === 'ALL') {
+      this.setflightsData(result);
+    }
+    if (this.airlineState === 'ALL' && this.airportState !== 'ALL') {
+      for (let i = 0; i < flightsInfo.length; i++) {
+        let oneFlight = flightsInfo[i];
+        let newFlights = [...oneFlight.flights].filter(
+          (f) => f.origin === this.airportState
+        );
+        oneFlight.flights = newFlights;
+      }
+    }
+
+    if (this.airlineState !== 'ALL' && this.airportState === 'ALL') {
+      for (let i = 0; i < flightsInfo.length; i++) {
+        let oneFlight = flightsInfo[i];
+        let newFlights = [...oneFlight.flights].filter(
+          (f) => f.airline === this.airlineState
+        );
+        oneFlight.flights = newFlights;
+      }
+    }
+    if (this.airlineState !== 'ALL' && this.airportState !== 'ALL') {
+      for (let i = 0; i < flightsInfo.length; i++) {
+        let oneFlight = flightsInfo[i];
+        let newFlights = [...oneFlight.flights].filter(
+          (f) => f.airline === this.airlineState
+        );
+
+        newFlights = newFlights.filter((f) => f.origin === this.airportState);
+
+        oneFlight.flights = newFlights;
+        if (oneFlight.flights.length > 0) {
+          resultedFlights.push(oneFlight);
+        }
+      }
+    }
+
+    this.setflightsData(resultedFlights);
+    // this.updateFlightsTable();
+  }
+
   async getPerformanceObersver(funcName: string) {
     const observer = new PerformanceObserver((list) =>
       list.getEntries().forEach((entry) => {
